@@ -68,11 +68,10 @@ onMounted(async () => {
   const user = await $auth.getUser();
   console.log(user);
   
-  var idToken = await $auth.tokenManager.get('idToken');
-  console.log(idToken);
-  
   var accessToken = await $auth.tokenManager.get('accessToken');
   console.log(accessToken);
+  
+  var idToken = await $auth.tokenManager.get('idToken');
   
   tokenVerifier.verify(idToken.idToken, null, (error, payload) => {
     if (error) {
@@ -80,6 +79,7 @@ onMounted(async () => {
       return;
     }
 	console.log('ID token signature is valid!');
+	console.log(payload);
   });
   
   claims.value = await Object.entries(user).map(entry => ({
