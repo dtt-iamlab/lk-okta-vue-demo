@@ -51,13 +51,37 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useAuth } from '@okta/okta-vue';
+import IdTokenVerifier from 'idtoken-verifier';
+import sampleConfig from '../config'
+
 const $auth = useAuth();
+
+const tokenVerifier = new IdTokenVerifier({
+  issuer: sampleConfig.oidc.issuer,
+  audience: sampleConfig.oidc.clientId,
+  jwksURI: sampleConfig.jwksUri
+});
 
 const claims = ref([]);
 
 onMounted(async () => {
   const user = await $auth.getUser();
   console.log(user);
+  
+  var idToken = await $auth.tokenManager.get('idToken');
+  console.log(idToken);
+  
+  var accessToken = await $auth.tokenManager.get('accessToken');
+  console.log(accessToken);
+  
+  tokenVerifier.verify(idToken.idToken, null, (error, payload) => {
+    if (error) {
+      // handle the error
+      return;
+    }
+	console.log('ID token signature is valid!');
+  });
+  
   claims.value = await Object.entries(user).map(entry => ({
     claim: entry[0],
     value: entry[1]

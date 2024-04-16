@@ -14,6 +14,7 @@ export default {
       disableHttpsCheck: OKTA_TESTING_DISABLEHTTPSCHECK
     }
   },
+  jwksUri: `${ISSUER}/v1/keys`,
   resourceServer: {
     messagesUrl: 'http://localhost:8000/api/messages'
   },
