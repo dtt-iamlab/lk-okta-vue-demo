@@ -7,10 +7,7 @@
     "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test": "npm run lint && npm run test:okta-hosted-login --prefix ../",
-    "pretest": "npm run pretest --prefix ../",
-    "postinstall": "npm run patch-semantic-ui-css --prefix ../"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@okta/okta-auth-js": "^7.2.0",
