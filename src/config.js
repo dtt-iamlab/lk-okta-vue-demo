@@ -1,6 +1,6 @@
 const { CLIENT_ID, ISSUER, OKTA_TESTING_DISABLEHTTPSCHECK } = process.env
 
-const BASENAME = process.env.NODE_ENV === 'production' ? '/okta-hosted-login' : '';
+const BASENAME = process.env.NODE_ENV === 'production' ? '' : '';
 const REDIRECT_URI = `${window.location.origin}${BASENAME}/login/callback`;
 
 export default {
